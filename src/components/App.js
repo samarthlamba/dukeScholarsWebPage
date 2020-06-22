@@ -1,4 +1,6 @@
 import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
 import ResearchTab from './ResearchTab';
 import MenuItem from './MenuItem';
@@ -23,12 +25,17 @@ class App extends React.Component{
 
   render(){
     return (
-      
       <div>
-        <MenuItem />
-        <NavigationBar />
-        <ResearchTab />
-        <table class="ui basic table"> <Table /> </table>
+        <Tabs defaultIndex={0}>
+          <TabList>
+            <Tab>News</Tab>
+            <Tab>Research</Tab>
+          </TabList>
+          <TabPanel>NEWS CONTENT</TabPanel>
+          <TabPanel>
+            <Table />
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }
