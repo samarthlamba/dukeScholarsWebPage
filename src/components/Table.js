@@ -1,17 +1,47 @@
 import React from 'react';
 import results from '../output.json';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import "./App.css";
-import { MDBDataTable } from 'mdbreact';
+import styled from 'styled-components'
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBDataTable
+} from 'mdbreact';
+import {
+  useTable,
+  useResizeColumns,
+  useFlexLayout,
+  useRowSelect,
+} from 'react-table'
+
+const Styles = styled.div`
+  padding: 1rem;
+
+  .table {
+    ${''}
+    display: block;
+    ${''}
+    overflow: auto;
+
+    }
+  
+`
+
 
 const table = () => {
-  const data = {
+  const data_collspan = {
     columns: [
       {
         label: 'Title',
         field: 'title',
         sort: 'asc',
-        width: 600,
+        width: 170,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -20,8 +50,8 @@ const table = () => {
       {
         label: 'Authors',
         field: 'authors',
+        width: 150,
         sort: 'asc',
-        width: 270,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -30,8 +60,8 @@ const table = () => {
       {
         label: 'published_date',
         field: 'doi',
-        sort: 'asc',
-        width: 200,
+        width: 230,
+        sort: 'asc', 
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -41,7 +71,7 @@ const table = () => {
         label: 'doi',
         field: 'doi',
         sort: 'asc',
-        width: 200,
+        width: 150,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -52,7 +82,6 @@ const table = () => {
         label: 'publication_location',
         field: 'publication_location',
         sort: 'asc',
-        width: 200,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -62,7 +91,6 @@ const table = () => {
         label: 'link',
         field: 'link',
         sort: 'asc',
-        width: 200,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
@@ -70,34 +98,38 @@ const table = () => {
       },{
         label: 'citations',
         field: 'citations',
-        sort: 'asc',
-        width: 200
+        sort: 'asc'
       },
       {
         label: 'readership',
         field: 'readership',
-        sort: 'asc',
-        width: 200
+        sort: 'asc'
       },
       {
         label: 'tweets',
         field: 'tweets',
-        sort: 'asc',
-        width: 200
+        sort: 'asc'
       }
     ],
     rows: results
   };
 
+  
+
   return (
-    <MDBDataTable
-      scrollY
-      maxHeight="40vh"
-      striped
-      bordered
-      small
-      data={data}
+    <Styles><table class="ui basic table"> 
+    
+          <MDBDataTable
+    scrollY
+    maxHeight="40vh"
+    MaxWidth = '1px'
+    striped
+    bordered
+    small
+    data={data_collspan}
     />
+     </table> </Styles>
+    
   );
 }
 
