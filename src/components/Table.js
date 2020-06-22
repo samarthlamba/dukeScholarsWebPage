@@ -1,49 +1,107 @@
 import React from 'react';
+import results from '../output.json';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import "./App.css";
+import { MDBDataTable } from 'mdbreact';
 
-class Table extends React.Component{
-  render(){
-    return (
-      <table class="ui selectable celled table">
-        <thead>
-          <tr>
-            <th>Attention Score</th>
-            <th>Citations</th>
-            <th>Published Date</th>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Article Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>782</td>
-            <td>180</td>
-            <td>January 1, 2014</td>
-            <td>Machine learning for science and society</td>
-            <td>Rudin, C</td>
-            <td>http://dx.doi.org/10.1007/s10994-013-5425-9</td>
-          </tr>
-          <tr>
-            <td>782</td>
-            <td>180</td>
-            <td>January 1, 2014</td>
-            <td>Machine learning for science and society</td>
-            <td>Rudin, C</td>
-            <td>http://dx.doi.org/10.1007/s10994-013-5425-9</td>
-          </tr>
-          <tr>
-            <td>782</td>
-            <td>180</td>
-            <td>January 1, 2014</td>
-            <td>Machine learning for science and society</td>
-            <td>Rudin, C</td>
-            <td>http://dx.doi.org/10.1007/s10994-013-5425-9</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  }
+const table = () => {
+  const data = {
+    columns: [
+      {
+        label: 'Title',
+        field: 'title',
+        sort: 'asc',
+        width: 600,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },
+      {
+        label: 'Authors',
+        field: 'authors',
+        sort: 'asc',
+        width: 270,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },
+      {
+        label: 'published_date',
+        field: 'doi',
+        sort: 'asc',
+        width: 200,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },
+      {
+        label: 'doi',
+        field: 'doi',
+        sort: 'asc',
+        width: 200,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },
+     
+      {
+        label: 'publication_location',
+        field: 'publication_location',
+        sort: 'asc',
+        width: 200,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },
+      {
+        label: 'link',
+        field: 'link',
+        sort: 'asc',
+        width: 200,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Name',
+        }
+      },{
+        label: 'citations',
+        field: 'citations',
+        sort: 'asc',
+        width: 200
+      },
+      {
+        label: 'readership',
+        field: 'readership',
+        sort: 'asc',
+        width: 200
+      },
+      {
+        label: 'tweets',
+        field: 'tweets',
+        sort: 'asc',
+        width: 200
+      }
+    ],
+    rows: results
+  };
+
+  return (
+    <MDBDataTable
+      scrollY
+      maxHeight="40vh"
+      striped
+      bordered
+      small
+      data={data}
+    />
+  );
 }
 
 
-export default Table;
+
+
+export default table;
