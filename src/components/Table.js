@@ -2,138 +2,225 @@ import React from 'react';
 import results from '../output.json';
 import "./App.css";
 import styled from 'styled-components'
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead,
-  MDBDataTable
-} from 'mdbreact';
+import ReactTable from "react-table";  
 import {
   useTable,
-  useResizeColumns,
-  useFlexLayout,
-  useRowSelect,
+  useGroupBy,
+  useFilters,
+  useSortBy,
+  useExpanded,
+ usePagination,
 } from 'react-table'
+import TableScrollbar from 'react-table-scrollbar';
+
+
+
+
+
+const table = () => {
+
 
 const Styles = styled.div`
   padding: 1rem;
 
-  .table {
-    ${''}
-    display: block;
-    ${''}
-    overflow: auto;
+  table {
+    border-spacing: 0;
+    border: 1px solid black;
 
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
     }
-  
+
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+
+      :last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  .pagination {
+    padding: 0.5rem;
+    display: inline-block; 
+    color: green; 
+    border-radius: 5px; 
+    disabled: true; 
+  }
 `
 
+function Table({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page, // Instead of using 'rows', we'll use page,
+    // which has only the rows for the active page
 
-const table = () => {
-  const data_collspan = {
-    columns: [
-      {
-        label: 'Title',
-        field: 'title',
-        sort: 'asc',
-        width: 170,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },
-      {
-        label: 'Authors',
-        field: 'authors',
-        width: 150,
-        sort: 'asc',
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },
-      {
-        label: 'published_date',
-        field: 'doi',
-        width: 230,
-        sort: 'asc', 
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },
-      {
-        label: 'doi',
-        field: 'doi',
-        sort: 'asc',
-        width: 150,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },
-     
-      {
-        label: 'publication_location',
-        field: 'publication_location',
-        sort: 'asc',
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },
-      {
-        label: 'link',
-        field: 'link',
-        sort: 'asc',
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
-        }
-      },{
-        label: 'citations',
-        field: 'citations',
-        sort: 'asc'
-      },
-      {
-        label: 'readership',
-        field: 'readership',
-        sort: 'asc'
-      },
-      {
-        label: 'tweets',
-        field: 'tweets',
-        sort: 'asc'
-      }
-    ],
-    rows: results
-  };
+    // The rest of these things are super handy, too ;)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0 },
+    },
+    usePagination
+  )
 
-  
-
+  // Render the UI for your table
   return (
-    <Styles><table class="ui basic table"> 
+    <>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row, i) => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+      {/* 
+        Pagination can be built however you'd like. 
+        This is just a very basic UI implementation:
+      */}
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
+  )
+}
+const data_collspan = [
+  {
+    Header: 'Title',
+    accessor: 'title'
+  },
+  {
+    Header: 'Authors',
+    accessor: 'authors'
+  },
+  {
+    Header: 'published_date',
+    accessor: 'published_date'
+  },
+  {
+    Header: 'doi',
+    accessor: 'doi'
+  },
+ 
+  {
+    Header: 'publication_location',
+    accessor: 'publication_location'
+  },
+  {
+    Header: 'link',
+    accessor: 'link'
+  },{
+    Header: 'citations',
+    accessor: 'citations'
+  },
+  {
+    Header: 'readership',
+    accessor: 'readership'
+  },
+  {
+    Header: 'tweets',
+    accessor: 'tweets'
+  }
+]
+return (
+  <Styles>
     
-          <MDBDataTable
-    scrollY
-    maxHeight="40vh"
-    MaxWidth = '1px'
-    striped
-    bordered
-    small
-    data={data_collspan}
-    />
-     </table> </Styles>
-    
-  );
+    <Table columns={data_collspan} data={results} />
+  </Styles>
+  
+)
 }
 
 
 
-
 export default table;
+    
+
+
+
+
+
+
