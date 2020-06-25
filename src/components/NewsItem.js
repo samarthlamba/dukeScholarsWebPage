@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewsItem.css'
 
 class NewsItem extends React.Component {
   constructor(props){
