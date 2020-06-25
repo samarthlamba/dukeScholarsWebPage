@@ -1,13 +1,18 @@
 import React from 'react';
+import './NewsTab.css'
+import NewsItem from './NewsItem';
 
 
-class NewsTab extends React.Component {
 
-  render() {
-    return ( 
-      <div> NEWS! </div>
-    );
-  }
+const NewsTab = (props) => {
+  const articles = props.articles.map((article) => {
+    return <NewsItem key={article.id} article={article} />
+  });
+  return (
+    <div className="news-tab">
+      {articles}
+    </div>
+  );
 }
 
 export default NewsTab;
