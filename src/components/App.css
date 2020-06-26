@@ -9,7 +9,7 @@
   }
 
   .header {
-    background-color: #f4e04d;
+    background-color: #F2F5F5;
     min-height: 10vh;
     display: flex;
     flex-direction: column;
@@ -18,26 +18,44 @@
     font-size: calc(10px + 2vmin);
     color: #10375c;
   }
+  .body {
+    background-color:#F2F5F5;
+    color: black;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+  }
 
   .Table {
-    border-spacing: 0px;
-    background: #fff;
+    border-spacing: 5px;
+    background: #86cc2a;
     box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
   }
   
   .Cell {
-    border: 1px solid #f4f6f8;
+    border: 1px solid #F2F5F5;
     padding: 4px;
     text-align: left;
   }
+.pagination .page-item.active .page-link { 
+  display: inline-block; 
+  background-color: #000; 
+  color: green; 
+  border-radius: 5px; 
+  disabled: true; 
+}
 
- 
-table {
-  display: flex;
-  justify-content: center;
-  border: 1px solid gray;
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+background-color: #000;
 }
-td {
-  border: 1px solid gray;
-  width: 30em;
+.center {
+  text-align: center;
 }
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
