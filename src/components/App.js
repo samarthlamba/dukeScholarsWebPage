@@ -1,18 +1,28 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
 import NewsTab from './NewsTab';
-import ResearchTab from './ResearchTab';
-import MenuItem from './MenuItem';
-import NavigationBar from './NavigationBar';
-import SearchBar from './SearchBar';
 import Table from './Table';
 import "./App.css";
 import results from '../output.json';
+import news from '../api/news';
 
 class App extends React.Component{
-  state = { selectedMenuIndex: 0 }
+  state = { selectedMenuIndex: 0, articles: [] }
+  
+  async componentDidMount(){
+    const response = await news.get('/v2/everything', {
+      params: {
+        q: '"duke" machine learning',
+        language: 'en',
+        sortBy: 'relevancy',
+        pageSize: 50
+      }
+    })
+
+    this.setState({ articles: response.data.articles })
+  }
+
   
   onMenuSelect = (index) => {
     this.setState({ selectedMenuIndex: index });
@@ -34,12 +44,12 @@ class App extends React.Component{
             <Tab>News</Tab>
             <Tab>Research</Tab>
           </TabList>
-          <TabPanel ><h2 class="ui header"> Current Events </h2>
-          <style>{'body { background-color: #D3D3D3; }'}</style>
+          <TabPanel >
+          <style>{'body { background-color: #FFFFFF; }'}</style>
+          <NewsTab articles={this.state.articles} />
           </TabPanel>
           
           <TabPanel>
-          <h2 class="ui header"> Research </h2>
             <Table />
           </TabPanel>
         </Tabs>
