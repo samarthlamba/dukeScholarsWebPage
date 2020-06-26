@@ -12,7 +12,7 @@ class App extends React.Component{
   async componentDidMount(){
     const response = await news.get('/v2/everything', {
       params: {
-        q: 'machine learning',
+        q: '"duke" machine learning',
         language: 'en',
         sortBy: 'relevancy',
         pageSize: 10
