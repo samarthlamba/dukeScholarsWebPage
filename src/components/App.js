@@ -4,11 +4,10 @@ import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
 import Table from './Table';
 import "./App.css";
-import results from '../output.json';
 import news from '../api/news';
 
 class App extends React.Component{
-  state = { selectedMenuIndex: 0, articles: [] }
+  state = { articles: [] }
   
   async componentDidMount(){
     const response = await news.get('/v2/everything', {
@@ -22,17 +21,6 @@ class App extends React.Component{
 
     this.setState({ articles: response.data.articles })
   }
-
-  
-  onMenuSelect = (index) => {
-    this.setState({ selectedMenuIndex: index });
-  }
-
-  tableReady = table => {
-    console.log(table);
-  }
-
-  
 
   render(){
     return (
