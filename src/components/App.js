@@ -4,7 +4,10 @@ import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
 import Table from './Table';
 import "./App.css";
+import ReactDOM from 'react-dom';
+import results from '../output.json';
 import news from '../api/news';
+
 
 class App extends React.Component{
   state = { articles: [] }
@@ -15,13 +18,22 @@ class App extends React.Component{
         q: '"duke" machine learning',
         language: 'en',
         sortBy: 'relevancy',
-        pageSize: 50
+        pageSize: 5
       }
     })
 
     this.setState({ articles: response.data.articles })
   }
+  onMenuSelect = (index) => {
+    this.setState({ selectedMenuIndex: index });
+  }
 
+  tableReady = table => {
+    console.log(table);
+  }
+  table = () =>{
+    ReactDOM.render(<Table />,document.getElementById('root'))
+  }
   render(){
     return (
       <div class = "body">
@@ -38,7 +50,7 @@ class App extends React.Component{
           </TabPanel>
           
           <TabPanel>
-            <Table />
+          <Table/>
           </TabPanel>
         </Tabs>
         
@@ -46,5 +58,6 @@ class App extends React.Component{
     );
   }
 };
+
 
 export default App;

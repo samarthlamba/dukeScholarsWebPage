@@ -2,16 +2,10 @@ import React from 'react';
 import results from '../output.json';
 import "./App.css";
 import styled from 'styled-components'
-import ReactTable from "react-table";  
-import {
-  useTable,
-  useGroupBy,
-  useFilters,
-  useSortBy,
-  useExpanded,
- usePagination,
-} from 'react-table'
-import TableScrollbar from 'react-table-scrollbar';
+import ReactDOM from 'react-dom';
+import { Table } from 'antd';
+import { MountNode } from 'semantic-ui-react';
+import moment from 'moment';
 
 
 
@@ -19,197 +13,81 @@ import TableScrollbar from 'react-table-scrollbar';
 
 const table = () => {
 
-
-const Styles = styled.div`
-  padding: 1rem;
-
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
-  }
-
-  .pagination {
-    padding: 0.5rem;
-    display: inline-block; 
-    color: green; 
-    border-radius: 5px; 
-    disabled: true; 
-  }
-`
-
-function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    state: { pageIndex, pageSize },
-  } = useTable(
+  const columns = [
     {
-      columns,
-      data,
-      initialState: { pageIndex: 0 },
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
+      render: text => <a>{text}</a>,
     },
-    usePagination
-  )
-
-  // Render the UI for your table
-  return (
-    <>
-      <pre>
-        <code>
-        </code>
-      </pre>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      {/* 
-        Pagination can be built however you'd like. 
-        This is just a very basic UI implementation:
-      */}
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              gotoPage(page)
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
-    </>
-  )
-}
-const data_collspan = [
-  {
-    Header: 'Title',
-    accessor: 'title'
-  },
-  {
-    Header: 'Authors',
-    accessor: 'authors'
-  },
-  {
-    Header: 'published_date',
-    accessor: 'published_date'
-  },
-  {
-    Header: 'doi',
-    accessor: 'doi'
-  },
- 
-  {
-    Header: 'publication_location',
-    accessor: 'publication_location'
-  },
-  {
-    Header: 'link',
-    accessor: 'link'
-  },{
-    Header: 'citations',
-    accessor: 'citations'
-  },
-  {
-    Header: 'readership',
-    accessor: 'readership'
-  },
-  {
-    Header: 'tweets',
-    accessor: 'tweets'
-  }
-]
+    {
+      title: 'Authors',
+      dataIndex: 'authors',
+      key: 'authors',
+    },
+    {
+      title: 'published_date',
+      dataIndex: 'published_date',
+      key: 'published_date',
+      sorter: (a, b) => moment(a.published_date).unix() - moment(b.published_date).unix(),
+    },
+    {
+      title: 'doi',
+      dataIndex: 'doi',
+      key: 'doi',
+    },
+   
+    {
+      title: 'publication_location',
+      dataIndex: 'publication_location',
+      key: 'publication_location',
+    },
+    {
+      title: 'link',
+      dataIndex: 'link',
+      key: 'link',
+      render: text => <a href={text}>{text}</a>
+    },{
+      title: 'citations',
+      dataIndex: 'citations',
+      key: 'citations',
+    },
+    {
+      title: 'readership',
+      dataIndex: 'readership',
+      key: 'readership',
+    },
+    {
+      title: 'tweets',
+      dataIndex: 'tweets',
+      key: 'tweets',
+    },
+  ];
+  const data = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
+      tags: ['nice', 'developer'],
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 2 Lake Park, London No. 2 Lake Park',
+      tags: ['loser'],
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
+      tags: ['cool', 'teacher'],
+    },
+  ];
 return (
-  <Styles>
-    
-    <Table columns={data_collspan} data={results} />
-  </Styles>
+  (<Table columns={columns} dataSource={results} />)
   
 )
 }
@@ -218,9 +96,5 @@ return (
 
 export default table;
     
-
-
-
-
 
 
