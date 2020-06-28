@@ -15,7 +15,7 @@ class App extends React.Component{
         q: '"duke" machine learning',
         language: 'en',
         sortBy: 'relevancy',
-        pageSize: 50
+        pageSize: 10
       }
     })
 
