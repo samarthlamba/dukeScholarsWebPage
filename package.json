@@ -6,7 +6,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+
+    "antd": "^4.3.5",
     "axios": "^0.19.2",
+
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "mdbreact": "^4.27.0",
@@ -19,6 +22,7 @@
     "react-table": "^7.2.1",
     "react-table-scrollbar": "^0.1.8",
     "react-tabs": "^3.1.1",
+    "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.1.1",
     "tabulator-tables": "^4.7.0"
   },
