@@ -44,7 +44,8 @@ class App extends React.Component{
           <h1 class="ui dividing header"> Duke@Scholars </h1>
           <Tabs tabBarStyle={{ 
             display: 'flex', 
-            justifyContent: 'left'
+            justifyContent: 'left',
+            alignItems: 'center'
             }} size="large" defaultActiveKey="1">
             <TabPane tab={<span> <ReadOutlined />News</span>} key="1">
               <NewsTab articles={this.state.articles}/>
