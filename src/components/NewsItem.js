@@ -23,21 +23,32 @@ class NewsItem extends React.Component {
   }
 
   render() {
-    const { description, urlToImage, url, title } = this.props.article;
+    const { description, urlToImage, url, title, publishedAt } = this.props.article;
+    // return (
+    //   <div>
+    //     <a className="article" href={url} alt={description} ref={this.imageRef} style={{backgroundImage: `url(${urlToImage})`}}></a>
+    //   </div>
+    // );
+
     return (
-      <div style={{gridRowEnd: `span ${this.state.spans}`}}>
-        <a className="image" href={url}>
+      <div className="image" style={{gridRowEnd: `span ${this.state.spans}`}}>
+        <a href={url}>
           <img
             ref={this.imageRef}
             alt={description}
             src={urlToImage}
           />
-          <h2>
-            <span>
-              {title}
-            </span>
-          </h2>
         </a>
+        <div className="footpanel">
+          <a className="articleTitle">
+            {title}
+          </a>
+          {/* <div>
+            <span>
+              {publishedAt}
+            </span>
+          </div> */}
+        </div>
       </div>
     );
   }
