@@ -20,13 +20,14 @@ class App extends React.Component{
       params: {
         q: '"duke" machine learning',
         language: 'en',
-        sortBy: 'relevancy',
-        pageSize: 10
+        sortBy: 'publishedAt',
+        pageSize: 5
       }
     })
 
     this.setState({ articles: response.data.articles })
   }
+  
   handleClick = (e) => {
     this.setState({ currentMenu: e.key });
   }
