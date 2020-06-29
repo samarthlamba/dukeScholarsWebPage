@@ -42,7 +42,7 @@ class App extends React.Component{
     return (
       <div class="body">
         <Layout>
-          <h1 class="ui dividing header"> Duke@Scholars </h1>
+          <h1 class="ui dividing header" id = "fonts"> Duke@Scholars </h1>
           <Tabs tabBarStyle={{ 
             display: 'flex', 
             justifyContent: 'left',
