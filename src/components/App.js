@@ -20,13 +20,14 @@ class App extends React.Component{
       params: {
         q: '"duke" machine learning',
         language: 'en',
-        sortBy: 'relevancy',
-        pageSize: 10
+        sortBy: 'publishedAt',
+        pageSize: 12
       }
     })
 
     this.setState({ articles: response.data.articles })
   }
+  
   handleClick = (e) => {
     this.setState({ currentMenu: e.key });
   }
@@ -41,7 +42,7 @@ class App extends React.Component{
     return (
       <div class="body">
         <Layout>
-          <h1 class="ui dividing header"> Duke@Scholars </h1>
+          <h1 class="ui dividing header" id = "fonts"> Duke@Scholars </h1>
           <Tabs tabBarStyle={{ 
             display: 'flex', 
             justifyContent: 'left',
