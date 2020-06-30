@@ -26,7 +26,7 @@ class NewsItem extends React.Component {
     const { description, urlToImage, url, title, publishedAt } = this.props.article;
     var date = publishedAt.substring(5,7) + ' - ' + publishedAt.substring(8,10) + ' - ' + publishedAt.substring(0,4);
     return (
-      <div className="news-tab" style={{position: 'relative'}}>
+      <div className="general-panel" style={{position: 'relative'}}>
         <a className="article" href={url} alt={description} ref={this.imageRef} style={{backgroundImage: `url(${urlToImage})`}}></a>
         <div className="footpanel">
           <a className="title" id="nohover" href={url}>

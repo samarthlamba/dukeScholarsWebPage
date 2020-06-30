@@ -10,7 +10,30 @@ const NewsTab = (props) => {
   });
   return (
     <div className="news-tab">
-      {articles}
+      <div id="panel1">
+        {articles[0]}
+      </div>
+      <div id="panel2">
+        {articles[1]}
+      </div>
+      <div id="panel3">
+        {articles[2]}
+      </div>
+      <div id="panel4">
+        {articles[3]}
+      </div>
+      <div id="panel5">
+        {articles[4]}
+      </div>
+      <div id="panel6">
+        {articles[5]}
+      </div>
+      <div id="panel7">
+        {articles[6]}
+      </div>
+      <div id="panel8">
+        {articles[7]}
+      </div>
     </div>
   );
 }
