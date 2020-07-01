@@ -1,16 +1,15 @@
 import React from 'react';
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Tabs, Menu, Layout} from 'antd';
+import { Tabs, Layout} from 'antd';
 import { TableOutlined, ReadOutlined } from '@ant-design/icons';
 import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
 import Table from './Table';
 import "./App.css";
 import ReactDOM from 'react-dom';
-import results from '../output.json';
+// import results from '../output.json';
 import news from '../api/news';
 
-const {Header, Content } = Layout;
 const { TabPane } = Tabs;
 
 class App extends React.Component{
@@ -21,7 +20,7 @@ class App extends React.Component{
         q: '"duke" machine learning',
         language: 'en',
         sortBy: 'publishedAt',
-        pageSize: 12
+        pageSize: 8
       }
     })
 
@@ -40,9 +39,9 @@ class App extends React.Component{
   }
   render(){
     return (
-      <div class="body">
+      <div className="body">
         <Layout>
-          <h1 class="ui dividing header" id = "fonts"> Duke@Scholars </h1>
+          <h1 className="ui dividing header" id = "fonts"> Duke@Scholars </h1>
           <Tabs tabBarStyle={{ 
             display: 'flex', 
             justifyContent: 'left',

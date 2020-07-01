@@ -21,13 +21,12 @@ class NewsItem extends React.Component {
 
   //   this.setState({spans})
   // }
-
   render() {
     const { description, urlToImage, url, title, publishedAt } = this.props.article;
     var date = publishedAt.substring(5,7) + ' - ' + publishedAt.substring(8,10) + ' - ' + publishedAt.substring(0,4);
     return (
-      <div className="general-panel" style={{position: 'relative'}}>
-        <a className="article" href={url} alt={description} ref={this.imageRef} style={{backgroundImage: `url(${urlToImage})`}}></a>
+      <div className="general-panel" id={this.props.id} style={{position: 'relative'}}>
+        <a className="article" href={url} alt={description} ref={this.imageRef} style={{backgroundImage: `url(${urlToImage})`}} />
         <div className="footpanel">
           <a className="title" id="nohover" href={url}>
             {title}

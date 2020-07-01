@@ -5,10 +5,11 @@ import NewsItem from './NewsItem';
 
 
 const NewsTab = (props) => {
-  const articles = props.articles.map((article) => {
-    return <NewsItem key={article.id} article={article} />
+  const articles = props.articles.map((article, index) => {
+    return <NewsItem id={index} article={article} />
   });
-  return (
+  
+    return (
     <div className="news-tab">
       <div id="panel1">
         {articles[0]}
@@ -19,7 +20,7 @@ const NewsTab = (props) => {
       <div id="panel3">
         {articles[2]}
       </div>
-      <div id="panel4">
+      <div className="large" id="panel4">
         {articles[3]}
       </div>
       <div id="panel5">
