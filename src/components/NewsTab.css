@@ -1,14 +1,15 @@
 .news-tab{
   display: grid;
-  /* grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); */
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 10px 10px;
   grid-auto-rows: 300px;
 }
 
-.general-panel {
-  display: grid;
-  grid-auto-rows: 300px;
+
+
+.wow {
+  display:grid;
+  grid-auto-rows: 600px !important;
 }
 
 #panel1 {
@@ -20,10 +21,10 @@
 #panel3 {
   grid-column-end: span 2;
 }
-.news-tab #panel4 {
+#panel4 {
   grid-column-end: span 4;
   grid-row-end: span 2;
-  height: 600px;
+
 }
 #panel5 {
   grid-column-end: span 2;

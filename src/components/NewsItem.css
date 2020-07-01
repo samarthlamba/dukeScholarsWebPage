@@ -24,6 +24,16 @@ li {
   /* line-height: 20px; */
 }
 
+.general-panel {
+  display: grid;
+  grid-auto-rows: 300px ;
+}
+
+div[id="3"]{
+  display: grid;
+  grid-auto-rows: 610px;
+}
+
 #nohover:hover{
   color:white;
   text-decoration: none;
