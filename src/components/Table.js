@@ -18,7 +18,7 @@ const table = () => {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      render: text => <a>{text}</a>,
+      render: text => <a>{text}</a>,  
     },
     {
       title: 'Authors',
@@ -30,11 +30,6 @@ const table = () => {
       dataIndex: 'published_date',
       key: 'published_date',
       sorter: (a, b) => moment(a.published_date).unix() - moment(b.published_date).unix(),
-    },
-    {
-      title: 'doi',
-      dataIndex: 'doi',
-      key: 'doi',
     },
    
     {

@@ -1,16 +1,15 @@
 import React from 'react';
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Tabs, Menu, Layout} from 'antd';
+import { Tabs, Layout} from 'antd';
 import { TableOutlined, ReadOutlined } from '@ant-design/icons';
 import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
 import Table from './Table';
 import "./App.css";
 import ReactDOM from 'react-dom';
-import results from '../output.json';
+// import results from '../output.json';
 import news from '../api/news';
 
-const {Header, Content } = Layout;
 const { TabPane } = Tabs;
 
 class App extends React.Component{
@@ -20,13 +19,14 @@ class App extends React.Component{
       params: {
         q: '"duke" machine learning',
         language: 'en',
-        sortBy: 'relevancy',
-        pageSize: 10
+        sortBy: 'publishedAt',
+        pageSize: 8
       }
     })
 
     this.setState({ articles: response.data.articles })
   }
+  
   handleClick = (e) => {
     this.setState({ currentMenu: e.key });
   }
@@ -39,9 +39,9 @@ class App extends React.Component{
   }
   render(){
     return (
-      <div class="body">
+      <div className="body">
         <Layout>
-          <h1 class="ui dividing header"> Duke@Scholars </h1>
+          <h1 className="ui dividing header" id = "fonts"> Duke@Scholars </h1>
           <Tabs tabBarStyle={{ 
             display: 'flex', 
             justifyContent: 'left',
