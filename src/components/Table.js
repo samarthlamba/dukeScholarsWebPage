@@ -7,84 +7,78 @@ import { Table } from 'antd';
 import { MountNode } from 'semantic-ui-react';
 import moment from 'moment';
 
-
-
-
-
 const table = () => {
+  let articleLink = '';
+
+  const linkUpdate = (link) => {
+    articleLink = link;
+  }
 
   const columns = [
+    {
+      title: '',
+      dataIndex: 'link',
+      key: 'titleLinker',
+      render: text => (
+        <script>
+          function Links() {
+            linkUpdate(text)
+          }
+        </script>
+      )
+    },
     {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      render: text => <a>{text}</a>,  
+      width: 250,
+      render: text => <a href={articleLink}>{text}</a>,  
     },
     {
       title: 'Authors',
       dataIndex: 'authors',
       key: 'authors',
+      width:200
     },
     {
-      title: 'published_date',
+      title: 'Publication Date',
       dataIndex: 'published_date',
       key: 'published_date',
+      width: 200,
       sorter: (a, b) => moment(a.published_date).unix() - moment(b.published_date).unix(),
     },
    
     {
-      title: 'publication_location',
+      title: 'Publication Location',
       dataIndex: 'publication_location',
       key: 'publication_location',
     },
+    // {
+    //   title: 'link',
+    //   dataIndex: 'link',
+    //   key: 'link',
+    //   render: text => <a href={text}>{text}</a>
+    // },
     {
-      title: 'link',
-      dataIndex: 'link',
-      key: 'link',
-      render: text => <a href={text}>{text}</a>
-    },{
-      title: 'citations',
+      title: 'Citations',
       dataIndex: 'citations',
       key: 'citations',
     },
     {
-      title: 'readership',
+      title: 'Mendeley Readership',
       dataIndex: 'readership',
       key: 'readership',
     },
     {
-      title: 'tweets',
+      title: 'Tweets',
       dataIndex: 'tweets',
       key: 'tweets',
     },
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 2 Lake Park, London No. 2 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
-return (
-  (<Table columns={columns} dataSource={results} />)
-  
-)
+
+  return (
+    <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={results} />
+  );
 }
 
 

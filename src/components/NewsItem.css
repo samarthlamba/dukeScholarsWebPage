@@ -26,12 +26,12 @@ li {
 
 .general-panel {
   display: grid;
-  grid-auto-rows: 300px ;
+  grid-auto-rows: 250px ;
 }
 
 div[id="3"]{
   display: grid;
-  grid-auto-rows: 610px;
+  grid-auto-rows: 510px;
 }
 
 #nohover:hover{
