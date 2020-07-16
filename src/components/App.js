@@ -9,10 +9,13 @@ import "./App.css";
 import ReactDOM from 'react-dom';
 // import results from '../output.json';
 import news from '../api/news';
+import paper from '../articles.db';
+
 
 const { TabPane } = Tabs;
 
 class App extends React.Component{
+
   state = { articles: [] }
   async componentDidMount(){
     const response = await news.get('/v2/everything', {
@@ -38,6 +41,8 @@ class App extends React.Component{
     ReactDOM.render(<Table />,document.getElementById('root'))
   }
   render(){
+
+    console.log(paper)
     return (
       <div className="body">
         <Layout>
