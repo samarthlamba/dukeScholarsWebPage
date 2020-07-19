@@ -1,13 +1,36 @@
 import React from 'react';
 import results from '../output.json';
 import "./App.css";
-import styled from 'styled-components'
-import ReactDOM from 'react-dom';
-import { MountNode } from 'semantic-ui-react';
 import moment from 'moment';
-import { Table, Input, Button, Space } from 'antd';
+import { Table, Input, Space } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, message} from 'antd';
+import { FileSearchOutlined } from '@ant-design/icons';
+
+function handleButtonClick(e) {
+  message.info('Click on left button.');
+  console.log('click left button', e);
+}
+
+function handleMenuClick(e) {
+  message.info('Click on menu item.');
+  console.log('click', e);
+}
+
+const menu = (
+  <Menu onClick={handleMenuClick}>
+    <Menu.Item key="1" icon={<FileSearchOutlined />}>
+      Machine Learning
+    </Menu.Item>
+    <Menu.Item key="2" icon={<FileSearchOutlined />}>
+      CNN
+    </Menu.Item>
+    <Menu.Item key="3" icon={<FileSearchOutlined />}>
+      Neural Network
+    </Menu.Item>
+  </Menu>
+);
 
 
 
@@ -79,18 +102,13 @@ class table extends React.Component {
     clearFilters();
     this.setState({ searchText: '' });
   };
-  fixColumn = columns => {
-    return columns.filter(
-      column => column.key != "titleLinker"
-    );
-  };
   render() {
     let articleLink = '';
     
     
-      const linkUpdate = (link) => {
-        articleLink = link;
-      }
+  const linkUpdate = (link) => {
+    articleLink = link;
+  }
   const columns = [
     {
       title: '',
@@ -102,28 +120,29 @@ class table extends React.Component {
             linkUpdate(text)
           }
         </script>
-      ),
-      visible: false
+      )
     },
     {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
       width: 250,
-      render: text => <a href={articleLink}>{text}</a>,  
       ...this.getColumnSearchProps('title'),  
+      render: text => <a href={articleLink}>{text}</a>,  
     },
     {
       title: 'Authors',
       dataIndex: 'authors',
       key: 'authors',
       ...this.getColumnSearchProps('authors'),  
+      width: 250,
     },
     {
       title: 'published_date',
       dataIndex: 'published_date',
       key: 'published_date',
       sorter: (a, b) => moment(a.published_date).unix() - moment(b.published_date).unix(),
+      width:200,
     },
    
     {
@@ -131,11 +150,13 @@ class table extends React.Component {
       dataIndex: 'publication_location',
       key: 'publication_location',
       ...this.getColumnSearchProps('publication_location'),  
+      width:200,
     },
     {
       title: 'citations',
       dataIndex: 'citations',
       key: 'citations',
+      
     },
     {
       title: 'readership',
@@ -150,7 +171,13 @@ class table extends React.Component {
   ];
   
 return (
-  (<Table columns={columns} dataSource={results}/>)
+  <div id="components-dropdown-demo-dropdown-button">
+  <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
+    Search Term
+  </Dropdown.Button>
+  <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={results} />
+</div>
+ 
   
 )
 }
