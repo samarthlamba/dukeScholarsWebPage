@@ -149,7 +149,7 @@ class table extends React.Component {
       title: 'publication_location',
       dataIndex: 'publication_location',
       key: 'publication_location',
-      ...this.getColumnSearchProps('publication_location2'),  
+      ...this.getColumnSearchProps('publication_location'),  
       width:200,
     },
     {
