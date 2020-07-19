@@ -173,7 +173,7 @@ class table extends React.Component {
 return (
   <div id="components-dropdown-demo-dropdown-button">
   <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
-    Search Term
+    Article Topic Lookip
   </Dropdown.Button>
   <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={results} />
 </div>
