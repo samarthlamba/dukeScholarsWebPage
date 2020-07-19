@@ -126,7 +126,7 @@ class table extends React.Component {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      width: 250,
+      width: 200,
       ...this.getColumnSearchProps('title'),  
       render: text => <a href={articleLink}>{text}</a>,  
     },
