@@ -2,14 +2,9 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 10px 10px;
-  grid-auto-rows: 300px;
-}
-
-
-
-.wow {
-  display:grid;
-  grid-auto-rows: 600px !important;
+  grid-auto-rows: 250px;
+  margin-right: 100px;
+  margin-left: 100px;
 }
 
 #panel1 {
@@ -24,7 +19,6 @@
 #panel4 {
   grid-column-end: span 4;
   grid-row-end: span 2;
-
 }
 #panel5 {
   grid-column-end: span 2;
@@ -38,10 +32,3 @@
 #panel8 {
   grid-column-end: span 3;
 }
-
-
-
-/* .news-tab img{
-  width: 400px;
-  grid-row-end: span 2;
-} */

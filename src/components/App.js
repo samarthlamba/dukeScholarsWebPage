@@ -56,23 +56,6 @@ class App extends React.Component{
           </Tabs>
         </Layout>
       </div>
-      // <div class = "body">
-      //   <h1 class="ui dividing header"> Duke@Scholars </h1>
-      //   <Tabs defaultIndex={1}>
-      //     <TabList>
-      //       <Tab>News</Tab>
-      //       <Tab>Research</Tab>
-      //     </TabList>
-      //     <TabPanel >
-      //     <style>{'body { background-color: #FFFFFF; }'}</style>
-      //     <NewsTab articles={this.state.articles} />
-      //     </TabPanel>
-          
-      //     <TabPanel>
-      //     <Table/>
-      //     </TabPanel>
-      //   </Tabs>
-      // </div>
     );
   }
 };
