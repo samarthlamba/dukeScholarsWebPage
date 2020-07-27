@@ -3,7 +3,7 @@ import { Tabs, Layout} from 'antd';
 import Table from './Table';
 import machine_learning from '../machine_learning.json';
 // import deep_learning from '../deep_learning.json';
-// import neural_networks from '../neural_networks.json';
+import neural_networks from '../neural_networks.json';
 
 const { TabPane } = Tabs;
 export default class ResearchTables extends React.Component{
@@ -26,7 +26,7 @@ export default class ResearchTables extends React.Component{
             {/* <Table data={deep_learning} /> */}
           </TabPane>
           <TabPane tab={<span>Neural Networks</span>} key="3">
-            {/* <Table data={neural_networks} /> */}
+            <Table data={neural_networks} />
           </TabPane>
         </Tabs>
       </Layout>
