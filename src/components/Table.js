@@ -1,5 +1,5 @@
 import React from 'react';
-import results from '../output.json';
+// import results from '../output.json';
 import "./App.css";
 import moment from 'moment';
 import { Table, Input, Space } from 'antd';
@@ -7,6 +7,17 @@ import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Button, message} from 'antd';
 import { FileSearchOutlined } from '@ant-design/icons';
+// import articles from '../articles.db';
+// import SqliteToJson from 'sqlite-to-json';
+// import sqlite3 from 'sqlite3';
+
+// const exporter = new SqliteToJson({
+//   client: new sqlite3.Database('../articles.db')
+// });
+
+// exporter.save('paper', './test.json', function (err) {
+//   // no error and you're good.
+// });
 
 function handleButtonClick(e) {
   message.info('Click on left button.');
@@ -138,20 +149,27 @@ class table extends React.Component {
       width: 250,
     },
     {
-      title: 'published_date',
+      title: 'Publication Date',
       dataIndex: 'published_date',
       key: 'published_date',
+      width: 200,
       sorter: (a, b) => moment(a.published_date).unix() - moment(b.published_date).unix(),
       width:200,
     },
    
     {
-      title: 'publication_location',
+      title: 'Publication Location',
       dataIndex: 'publication_location',
       key: 'publication_location',
       ...this.getColumnSearchProps('publication_location'),  
       width:200,
     },
+    // {
+    //   title: 'link',
+    //   dataIndex: 'link',
+    //   key: 'link',
+    //   render: text => <a href={text}>{text}</a>
+    // },
     {
       title: 'citations',
       dataIndex: 'citations',
@@ -159,12 +177,12 @@ class table extends React.Component {
       
     },
     {
-      title: 'readership',
+      title: 'Mendeley Readership',
       dataIndex: 'readership',
       key: 'readership',
     },
     {
-      title: 'tweets',
+      title: 'Tweets',
       dataIndex: 'tweets',
       key: 'tweets',
     },
@@ -175,7 +193,7 @@ return (
   <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
     Article Topic Lookup
   </Dropdown.Button>
-  <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={results} />
+  <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={this.props.data} />
 </div>
  
   

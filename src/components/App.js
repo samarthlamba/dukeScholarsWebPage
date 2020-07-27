@@ -1,18 +1,19 @@
 import React from 'react';
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Tabs, Layout} from 'antd';
 import { TableOutlined, ReadOutlined } from '@ant-design/icons';
-import 'react-tabs/style/react-tabs.css';
 import NewsTab from './NewsTab';
-import Table from './Table';
+import ResearchTables from './ResearchTables';
 import "./App.css";
 import ReactDOM from 'react-dom';
 // import results from '../output.json';
 import news from '../api/news';
+// import paper from '../articles.db';
+
 
 const { TabPane } = Tabs;
 
 class App extends React.Component{
+
   state = { articles: [] }
   async componentDidMount(){
     const response = await news.get('/v2/everything', {
@@ -31,13 +32,16 @@ class App extends React.Component{
     this.setState({ currentMenu: e.key });
   }
 
-  tableReady = table => {
-    console.log(table);
-  }
-  table = () =>{
-    ReactDOM.render(<Table />,document.getElementById('root'))
-  }
+  // tableReady = table => {
+  //   console.log(table);
+  // }
+  // table = () =>{
+  //   ReactDOM.render(<Table />,document.getElementById('root'))
+  // }
+
   render(){
+
+    // console.log(paper)
     return (
       <div className="body">
         <Layout>
@@ -46,12 +50,12 @@ class App extends React.Component{
             display: 'flex', 
             justifyContent: 'left',
             alignItems: 'center'
-            }} size="large" defaultActiveKey="1">
+            }} size="large" centered={true} defaultActiveKey="2">
             <TabPane tab={<span> <ReadOutlined />News</span>} key="1">
               <NewsTab articles={this.state.articles}/>
             </TabPane>
             <TabPane tab={<span><TableOutlined />Research</span>} key="2">
-              <Table />
+              <ResearchTables />
             </TabPane>
           </Tabs>
         </Layout>
