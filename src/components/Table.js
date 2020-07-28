@@ -190,9 +190,6 @@ class table extends React.Component {
   
 return (
   <div id="components-dropdown-demo-dropdown-button">
-  <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
-    Article Topic Lookup
-  </Dropdown.Button>
   <Table style={{marginRight:50, marginLeft:50}} columns={columns} dataSource={this.props.data} />
 </div>
  
