@@ -7,6 +7,8 @@ import "./App.css";
 import ReactDOM from 'react-dom';
 // import results from '../output.json';
 import news from '../api/news';
+import database from '../api/database';
+import axios from 'axios'
 // import paper from '../articles.db';
 
 
@@ -14,8 +16,20 @@ const { TabPane } = Tabs;
 
 class App extends React.Component{
 
+  getArticle = () => {
+    
+    database.get('/api')
+      .then((response) => {
+        console.log('im here');
+      })
+      .catch(() => {
+        console.log('sam: oops, not working.');
+      });
+  }
+
   state = { articles: [] }
   async componentDidMount(){
+    this.getArticle();
     const response = await news.get('/v2/everything', {
       params: {
         q: '"duke" machine learning',
@@ -63,6 +77,7 @@ class App extends React.Component{
     );
   }
 };
+
 
 
 export default App;

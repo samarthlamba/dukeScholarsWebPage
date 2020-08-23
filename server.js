@@ -11,6 +11,7 @@ const MONGODB_URI = 'mongodb+srv://daml123:scholars@cluster0.pecv7.mongodb.net/<
 
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
+    dbName: "articles",
     useUnifiedTopology: true
 });
 
@@ -20,8 +21,8 @@ mongoose.connection.on('connected', () => {
 
 // Schema
 const Schema = mongoose.Schema;
-const articleSchema = new Schema({
 
+const articleSchema = new Schema({
   title: String,
   authors: String,
   published_date: String,
@@ -33,7 +34,7 @@ const articleSchema = new Schema({
   readership: String,
   tweets: String,
   news_mentions: String
-});
+}, {collection: 'machine_learning'});
 
 // Model
 const article = mongoose.model('article', articleSchema);
