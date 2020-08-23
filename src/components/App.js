@@ -64,5 +64,25 @@ class App extends React.Component{
   }
 };
 
+const {
+  Stitch,
+  RemoteMongoClient,
+  AnonymousCredential
+} = require('mongodb-stitch-browser-sdk');
+
+const client = Stitch.initializeDefaultAppClient('dukescholars-salrw');
+
+const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('articles');
+
+client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
+db.collection('machine_learning').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
+).then(() =>
+db.collection('machine_learning').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
+).then(docs => {
+  console.log("Found docs", docs)
+  console.log("[MongoDB Realm] Connected to Realm")
+}).catch(err => {
+  console.error(err)
+});
 
 export default App;
