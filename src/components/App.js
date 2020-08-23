@@ -50,7 +50,7 @@ class App extends React.Component{
             display: 'flex', 
             justifyContent: 'left',
             alignItems: 'center'
-            }} size="large" centered={true} defaultActiveKey="2">
+            }} size="large" centered={true} defaultActiveKey="1">
             <TabPane tab={<span> <ReadOutlined />News</span>} key="1">
               <NewsTab articles={this.state.articles}/>
             </TabPane>
