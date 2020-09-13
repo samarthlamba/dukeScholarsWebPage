@@ -20,7 +20,7 @@ export default class ResearchTables extends React.Component{
           marginLeft: 50
         }} size="default" type="card" centered={true} defaultActiveKey="1">
           <TabPane tab={<span>Machine Learning</span>} key="1">
-            <Table data={machine_learning} />
+            <Table data={this.props.data} />
           </TabPane>
           <TabPane tab={<span>Deep Learning</span>} key="2">
             <Table data={deep_learning} />

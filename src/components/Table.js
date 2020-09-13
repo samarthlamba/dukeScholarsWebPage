@@ -29,19 +29,19 @@ function handleMenuClick(e) {
   console.log('click', e);
 }
 
-const menu = (
-  <Menu onClick={handleMenuClick}>
-    <Menu.Item key="1" icon={<FileSearchOutlined />}>
-      Machine Learning
-    </Menu.Item>
-    <Menu.Item key="2" icon={<FileSearchOutlined />}>
-      CNN
-    </Menu.Item>
-    <Menu.Item key="3" icon={<FileSearchOutlined />}>
-      Neural Network
-    </Menu.Item>
-  </Menu>
-);
+// const menu = (
+//   <Menu onClick={handleMenuClick}>
+//     <Menu.Item key="1" icon={<FileSearchOutlined />}>
+//       Machine Learning
+//     </Menu.Item>
+//     <Menu.Item key="2" icon={<FileSearchOutlined />}>
+//       CNN
+//     </Menu.Item>
+//     <Menu.Item key="3" icon={<FileSearchOutlined />}>
+//       Neural Network
+//     </Menu.Item>
+//   </Menu>
+// );
 
 
 

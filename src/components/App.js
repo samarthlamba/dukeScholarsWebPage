@@ -15,19 +15,21 @@ import axios from 'axios'
 const { TabPane } = Tabs;
 
 class App extends React.Component{
-
+  
   getArticle = () => {
-    
-    database.get('/api')
+    axios.get('http://localhost:8080/api')
       .then((response) => {
-        console.log('im here');
+        console.log('grabbing data from server');
+        this.setState({ data: response.data});
+        // send response.data to research tab
+        
       })
       .catch(() => {
-        console.log('sam: oops, not working.');
+        console.log('Error while trying to reach server.');
       });
   }
 
-  state = { articles: [] }
+  state = { articles: [], data:[] }
   async componentDidMount(){
     this.getArticle();
     const response = await news.get('/v2/everything', {
@@ -69,7 +71,7 @@ class App extends React.Component{
               <NewsTab articles={this.state.articles}/>
             </TabPane>
             <TabPane tab={<span><TableOutlined />Research</span>} key="2">
-              <ResearchTables />
+              <ResearchTables data={this.state.data}/>
             </TabPane>
           </Tabs>
         </Layout>

@@ -7,6 +7,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080; // Step 1
 
+var cors = require('cors');
+app.use(cors());
+
 const MONGODB_URI = 'mongodb+srv://daml123:scholars@cluster0.pecv7.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
 mongoose.connect(MONGODB_URI, {
