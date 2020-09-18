@@ -24,8 +24,7 @@ mongoose.connection.on('connected', () => {
 
 // Schema
 const Schema = mongoose.Schema;
-
-const articleSchema = new Schema({
+let schemaStructure = {
   title: String,
   authors: String,
   published_date: String,
@@ -37,16 +36,46 @@ const articleSchema = new Schema({
   readership: String,
   tweets: String,
   news_mentions: String
-}, {collection: 'machine_learning'});
+};
+
+const machine_learningSchema = new Schema(schemaStructure, {collection: 'machine_learning'});
 
 // Model
-const article = mongoose.model('article', articleSchema);
+const machine_learning_articles = mongoose.model('machine_learning', machine_learningSchema);
+
+const deep_learningSchema = new Schema(schemaStructure, {collection: 'deep_learning'});
+const deep_learning_articles = mongoose.model('deep_learning', deep_learningSchema);
+
+const neural_networksSchema = new Schema(schemaStructure, {collection: 'neural_networks'});
+const neural_networks_articles = mongoose.model('neural_networks', neural_networksSchema);
 
 
 app.use(morgan('tiny'));
 
-app.get('/api', (req, res) => {
-  article.find({})
+app.get('/machine_learning', (req, res) => {
+  machine_learning_articles.find({})
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+})
+
+app.get('/deep_learning', (req, res) => {
+  deep_learning_articles.find({})
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+})
+
+app.get('/neural_networks', (req, res) => {
+  neural_networks_articles.find({})
     .then((data) => {
       console.log(data);
       res.json(data);

@@ -15,28 +15,14 @@ import axios from 'axios'
 const { TabPane } = Tabs;
 
 class App extends React.Component{
-  
-  getArticle = () => {
-    axios.get('http://localhost:8080/api')
-      .then((response) => {
-        console.log('grabbing data from server');
-        this.setState({ data: response.data});
-        // send response.data to research tab
-        
-      })
-      .catch(() => {
-        console.log('Error while trying to reach server.');
-      });
-  }
+  state = { articles: []}
 
-  state = { articles: [], data:[] }
   async componentDidMount(){
-    this.getArticle();
     const response = await news.get('/v2/everything', {
       params: {
-        q: '"duke" machine learning',
+        q: '"duke university" machine learning',
         language: 'en',
-        sortBy: 'publishedAt',
+        sortBy: 'relevancy',
         pageSize: 8
       }
     })
@@ -47,13 +33,6 @@ class App extends React.Component{
   handleClick = (e) => {
     this.setState({ currentMenu: e.key });
   }
-
-  // tableReady = table => {
-  //   console.log(table);
-  // }
-  // table = () =>{
-  //   ReactDOM.render(<Table />,document.getElementById('root'))
-  // }
 
   render(){
 
@@ -71,7 +50,7 @@ class App extends React.Component{
               <NewsTab articles={this.state.articles}/>
             </TabPane>
             <TabPane tab={<span><TableOutlined />Research</span>} key="2">
-              <ResearchTables data={this.state.data}/>
+              <ResearchTables/>
             </TabPane>
           </Tabs>
         </Layout>
