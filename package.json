@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.3.5",
     "aws-sdk": "^2.721.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-preset-react": "^6.24.1",
     "babelify": "^10.0.0",
     "bootstrap": "^4.5.0",
